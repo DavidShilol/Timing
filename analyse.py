@@ -1,10 +1,11 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 import method
 
 
 con = method.ConnectMysql()
 cursor = con.cursor()
 table = 'timing'
+data = []
 try:
 	sql = 'select * from {} where etime!=\'0000-01-01 00:00:00\';'.format(table)
 	cursor.execute(sql)
