@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 import method
 
 
@@ -15,18 +15,23 @@ except Exception as e:
 con.close()
 
 # print(data)
+today = datetime.now().date()
+monday = today-timedelta(days=today.weekday())
+sunday = monday+timedelta(days=6)
+week_data = [x for x in data if monday <= x[2].date() <= sunday]
+# print(week_data)
 res = []
-for line in data:
+for line in week_data:
 	delta = line[2]-line[1]
 	res.append((line[0], line[1], line[2], delta, line[3]))
 res_day = {}
 for x in res:
 	date = x[2].date()
 	res_day[date] = res_day.get(date, timedelta())+x[3]
-print('Summary:')
+print('Learning Record:')
 sum_time = timedelta()
 for k, v in res_day.items():
-	print(k, v)
+	print(k.strftime('%m-%d'), v)
 	sum_time += v
-print('Sum_time:{}'.format(sum_time))
-print('Avg_time:{}'.format(sum_time/len(res_day)))
+print('Total time this week:{}'.format(sum_time))
+print('Average time this week:{}'.format(sum_time/len(res_day)))
