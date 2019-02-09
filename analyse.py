@@ -34,4 +34,4 @@ for k, v in res_day.items():
 	print(k.strftime('%m-%d'), v)
 	sum_time += v
 print('Total time this week:{}'.format(sum_time))
-print('Average time this week:{}'.format(sum_time/len(res_day)))
+print('Average time this week:{}'.format(sum_time/today.isoweekday()))
